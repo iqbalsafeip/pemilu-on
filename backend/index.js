@@ -5,14 +5,50 @@ require('dotenv').config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
+// routes
+app.use('/api/penduduk', require('./api/penduduk/penduduk.routes'));
+
+app.get('/api', (req, res) => {
 	res.json({
 		message: 'welcome to the rest api'
 	});
 });
 
-// routes
-app.use('/api/penduduk', require('./api/penduduk/penduduk.routes'));
+// admin login
+app.post('/api', (req, res) => {
+	const data = req.body;
+	require('./config/db').query(
+		'SELECT * FROM tb_admin WHERE username=?',
+		[ data.username ],
+		(err, result, fields) => {
+			if (err) {
+				return res.json({
+					success: 0,
+					message: 'failed to login'
+				});
+			}
+
+			if (result.length === 0) {
+				return res.json({
+					success: 0,
+					message: 'user not found'
+				});
+			}
+
+			if (result[0].password !== data.password) {
+				return res.json({
+					success: 0,
+					message: 'password incorrect'
+				});
+			}
+
+			return res.json({
+				success: 1,
+				data: result
+			});
+		}
+	);
+});
 
 const APP_PORT = process.env.APP_PORT;
 app.listen(APP_PORT, () => {
