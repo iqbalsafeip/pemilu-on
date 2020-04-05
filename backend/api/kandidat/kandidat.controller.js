@@ -1,4 +1,4 @@
-const { get, vote, _delete, add } = require('./kandidat.services');
+const { get, vote, _delete, add, update } = require('./kandidat.services');
 
 module.exports = {
 	getKandidat: (req, res) => {
@@ -48,6 +48,12 @@ module.exports = {
 	deleteKandidat: (req, res) => {
 		const data = req.body;
 		_delete(data, (err, result) => {
+			if (err) {
+				return res.json({
+					success: 0,
+					message: 'failed to delete'
+				});
+			}
 			if (result.affectedRows > 0) {
 				return res.json({
 					success: 1,
@@ -74,6 +80,29 @@ module.exports = {
 			return res.json({
 				success: 0,
 				message: 'failed to add'
+			});
+		});
+	},
+	updateKandidat: (req, res) => {
+		const data = req.body;
+		update(data, (err, result) => {
+			if (err) {
+				return res.json({
+					success: 0,
+					message: 'failed to update'
+				});
+			}
+
+			if (result.affectedRows > 0) {
+				return res.json({
+					success: 1,
+					data: result
+				});
+			}
+
+			return res.json({
+				success: 0,
+				message: 'failed to update'
 			});
 		});
 	}

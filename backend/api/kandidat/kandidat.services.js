@@ -42,8 +42,16 @@ module.exports = {
 			if (err) {
 				return cb(true);
 			}
-
-			return cb(null, result);
+			pool.query(
+				'DELETE FROM tb_data_voting WHERE id_kandidat=?',
+				[ data.id_kandidat ],
+				(err, result, fields) => {
+					if (err) {
+						return cb(true);
+					}
+					return cb(null, result);
+				}
+			);
 		});
 	},
 
@@ -51,6 +59,30 @@ module.exports = {
 		pool.query(
 			"INSERT INTO tb_kandidat VALUES('',?,?,?,?,?,?,?,?)",
 			[ data.nama, data.id_partai, data.id_wakil, data.usia, data.alamat, data.gambar, data.visi, data.misi ],
+			(err, result, fields) => {
+				if (err) {
+					return cb(true);
+				}
+
+				return cb(null, result);
+			}
+		);
+	},
+
+	update: (data, cb) => {
+		pool.query(
+			'UPDATE tb_kandidat SET nama=?, id_partai=?, id_wakil=?, usia=?, alamat=?,gambar=?, visi=?, misi=? WHERE id_kandidat=?',
+			[
+				data.nama,
+				data.id_partai,
+				data.id_wakil,
+				data.usia,
+				data.alamat,
+				data.gambar,
+				data.visi,
+				data.misi,
+				data.id_kandidat
+			],
 			(err, result, fields) => {
 				if (err) {
 					return cb(true);

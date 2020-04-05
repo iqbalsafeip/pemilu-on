@@ -14,7 +14,7 @@ app.use('/api/kandidat', require('./api/kandidat/kandidat.routes'));
 
 app.get('/api', (req, res) => {
 	res.json({
-		message: 'welcome to the rest api'
+		message: 'welcome to the rest api, goto /penduduk for data penduduk, goto /kandidat for data kandidat'
 	});
 });
 
