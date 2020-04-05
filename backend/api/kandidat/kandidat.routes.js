@@ -1,7 +1,15 @@
 const route = require('express').Router();
-const { getKandidat, voteKandidat, addKandidat, updateKandidat, deleteKandidat } = require('./kandidat.controller');
+const {
+	getDetailsKandidat,
+	voteKandidat,
+	addKandidat,
+	updateKandidat,
+	deleteKandidat,
+	getKandidat
+} = require('./kandidat.controller');
 
 route.get('/', getKandidat);
+route.get('/details', getDetailsKandidat);
 route.post('/', addKandidat);
 route.post('/vote', voteKandidat);
 route.delete('/', deleteKandidat);

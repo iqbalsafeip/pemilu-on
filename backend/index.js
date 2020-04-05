@@ -11,6 +11,8 @@ app.use(express.urlencoded({ extended: false }));
 // routes
 app.use('/api/penduduk', require('./api/penduduk/penduduk.routes'));
 app.use('/api/kandidat', require('./api/kandidat/kandidat.routes'));
+app.use('/api/wakil', require('./api/wakil/wakil.routes'));
+app.use('/api/partai', require('./api/partai/partai.routes'));
 
 app.get('/api', (req, res) => {
 	res.json({

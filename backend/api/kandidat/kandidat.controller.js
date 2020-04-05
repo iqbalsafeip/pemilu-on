@@ -1,12 +1,34 @@
-const { get, vote, _delete, add, update } = require('./kandidat.services');
+const { getDetails, vote, _delete, add, update, get } = require('./kandidat.services');
 
 module.exports = {
+	getDetailsKandidat: (req, res) => {
+		getDetails((err, result) => {
+			if (err) {
+				return res.json({
+					success: 0,
+					message: 'failed to get'
+				});
+			}
+
+			if (result.length === 0) {
+				return res.json({
+					success: 0,
+					message: 'data not found'
+				});
+			}
+
+			return res.json({
+				success: 1,
+				data: result
+			});
+		});
+	},
 	getKandidat: (req, res) => {
 		get((err, result) => {
 			if (err) {
 				return res.json({
 					success: 0,
-					message: 'fail to get'
+					message: 'failed to get'
 				});
 			}
 
