@@ -1,12 +1,16 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 require('dotenv').config();
 
+// middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use('/api/penduduk', require('./api/penduduk/penduduk.routes'));
+app.use('/api/kandidat', require('./api/kandidat/kandidat.routes'));
 
 app.get('/api', (req, res) => {
 	res.json({
