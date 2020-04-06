@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const server = require('https').createServer(app);
 require('dotenv').config();
 
 // middleware
@@ -57,6 +58,6 @@ app.post('/api', (req, res) => {
 });
 
 const APP_PORT = process.env.APP_PORT;
-app.listen(APP_PORT, () => {
+server.listen(APP_PORT, () => {
 	console.log('listen on ' + APP_PORT);
 });
