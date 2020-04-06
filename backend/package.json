@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "this is for api",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "iqbal safei",
   "license": "ISC",
@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "^10"
   }
 }
