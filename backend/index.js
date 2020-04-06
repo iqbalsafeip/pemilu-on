@@ -58,6 +58,6 @@ app.post('/api', (req, res) => {
 });
 
 const APP_PORT = process.env.APP_PORT;
-server.listen(APP_PORT, () => {
-	console.log('listen on ' + APP_PORT);
+server.listen(8080, () => {
+	console.log('listen on ' + 8080);
 });
